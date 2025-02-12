@@ -1,8 +1,8 @@
-import sqlite3 from 'slite3'
+import sqlite3 from 'sqlite3';
 
-const db = new sqlite3.Database('library_db.slite', (err)=>{
+const db = new sqlite3.Database('library_db.sqlite', (err)=>{
     if(err){
-        console.error('Database not conect', err.menssage);
+        console.error('Database not conect', err.message);
     } else {
         console.log('Database conect');
     } 

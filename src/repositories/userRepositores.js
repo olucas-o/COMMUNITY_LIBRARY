@@ -1,27 +1,54 @@
-import db from '..\config\database.js'; 
+import db from '../config/database.js'; 
 
 db.run(`
     CREATE TABLE IF NOT EXISTS users (
-    id INTERGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    gmail TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
-    avatar TEXT
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        avatar TEXT
     )
-`)
-db.run(`
-    INSERT INTO users (username, email, password, avatar)
-    VALUES (?, ?, ?, ?)
-    `, [username, email, password, avatar], (err) => {
-    if (err) {
-    reject(err);
-    } else {
-    resolve({ message: "Usuário criado com sucesso" });
-    }
-    });
-    
+`);
+
+function createUserRepository(newUser){
+    return new Promise((res, rej) =>{
+        const { username, email, password, avatar } = newUser;
+        db.run(`
+            INSERT INTO users (username, email, password, avatar)
+            VALUES (?, ?, ?, ?)
+            `, 
+            [username, email, password, avatar], 
+            (err) => {
+                if (err) {
+                    rej(err)
+                } else {
+                    res({id: this.lastID, ...newUser})
+                }
+            }
+        );
+    })
+}
+
+function findUserByEmailRepository(email){
+    return new Promise((res,req)=>{
+        db.get(`
+            SELECT id, username, email, avatar FROM users
+            WHERE email = ?    
+        `,
+        [email],
+        (err,row)=>{
+            if (err){
+                req(err)
+            } else {
+                res(row)
+            }
+        })
+    })
+}
+
 export default {
-        createUserRepository
-        };
+    createUserRepository,
+    findUserByEmailRepository
+};
         
     

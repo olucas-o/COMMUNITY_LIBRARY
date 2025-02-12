@@ -1,15 +1,10 @@
 import express from 'express';
+import usersRouters from './src/routes/usersRouters.js'
 const app = express();
 
 app.use(express.json());
-const port = 3000;
-const users = [] 
-app.post('/users', (req, res) => {
-    const body = req.body;
-    users.push(body);
-    res.status(201).json(users);
-});
+app.use(usersRouters);
 
-app.listen(port, () => {
-console.log(`Server running on port ${port}`);
+app.listen(3000, () => {
+    console.log(`Server running on port 3000`);
 });
