@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import userController from '../controller/usersContreller.js';
-import { validate } from '../middleware/validationMiddlewares.js'; 
+import { validate, validateId } from '../middleware/validationMiddlewares.js'; 
 import { userSchema } from '../schema/usersSchema.js';
 
 
@@ -10,5 +10,15 @@ router.post('/users',
     validate(userSchema),
     userController.createUserController
 );
+router.get('/users', userController.findAllUsersController);
+router.get('/users/:id',
+    validateId,
+    userController.findUserByIdController);
+router.patch('/users/:id',
+    validateId,
+    userController.updateUserController);
+router.delete('/users/:id',
+    validateId, 
+    userController.deleteUserContreller)
 
 export default router;
