@@ -18,7 +18,7 @@ function createUserRepository(newUser){
             VALUES (?, ?, ?, ?)
             `, 
             [username, email, password, avatar], 
-            (err) => {
+            function(err) {
                 if (err) {
                     rej(err)
                 } else {
