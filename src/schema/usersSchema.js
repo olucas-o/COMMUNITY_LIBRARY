@@ -6,10 +6,11 @@ const userSchema = z.object({
     avatar: z.string().url('Invalid URL').optional()
 });
 
-const userIdSchema = z.object({
-    userId: z.number().int().positive('User ID must be positive and integer'),
+const IdSchema = z.object({
+    Id: z.number().int().positive('User ID must be positive and integer'),
 });
 
-export{userSchema,
-    userIdSchema
+export{
+    userSchema,
+    IdSchema
 }
