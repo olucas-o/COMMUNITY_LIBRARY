@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import userController from '../controller/usersContreller.js';
-import { validate, validateUserId } from '../middleware/validationMiddlewares.js'; 
+import { validate, validateId } from '../middleware/validationMiddlewares.js'; 
 import { userSchema } from '../schema/usersSchema.js';
 import {authMiddleware} from '../middleware/authMiddleware.js'
 
@@ -22,15 +22,15 @@ router.get(
     userController.findAllUsersController
 );
 router.get('/users/:id',
-    validateUserId,
+    validateId,
     userController.findUserByIdController
 );
 router.patch('/users/:id',
-    validateUserId,
+    validateId,
     userController.updateUserController
 );
 router.delete('/users/:id',
-    validateUserId, 
+    validateId, 
     userController.deleteUserContreller
 );
 

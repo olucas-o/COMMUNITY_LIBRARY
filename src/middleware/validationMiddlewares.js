@@ -1,4 +1,4 @@
-import { IdSchema } from "../schema/usersSchema.js";
+import { IdSchema } from "../schema/IdSchema.js";
 
 const validate = (schema)=> async (req, res, next)=>{
     try{
@@ -9,19 +9,10 @@ const validate = (schema)=> async (req, res, next)=>{
     }
 };
 
-const validateUserId = (req, res, next)=>{
-    try{
-        const userId = +req.params.id;
-        IdSchema.parse({Id: userId});
-        next();
-    }catch(e){
-        res.status(400).send({error: e.errors})
-    }
-};
-
-const validateBookId = (req, res, next)=>{
+const validateId = (req, res, next)=>{
     try{
         IdSchema.parse({Id: +req.params.id});
+        console.log(+req.params.id)
         next();
     }catch(e){
         res.status(400).send({error: e.errors})
@@ -30,6 +21,5 @@ const validateBookId = (req, res, next)=>{
 
 export {
     validate,
-    validateUserId,
-    validateBookId
+    validateId
 };
