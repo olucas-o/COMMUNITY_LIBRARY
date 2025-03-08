@@ -25,9 +25,9 @@ function sendEmail(username, email, bookemail, dueDate){
                             <tr>
                                 <td>
                                     <h2 style="color: #333;">Library Due Date Reminder</h2>
-                                    <p>Dear <strong>"${ username }"</strong>,</p>
+                                    <p>Dear <strong>${ username }</strong>,</p>
                                     <p>This is a friendly reminder that your borrowed book is due soon.</p>
-                                    <p><strong>Book:</strong> ${ bookemail }</p>
+                                    <p><strong>Book:</strong>"${ bookemail }"</p>
                                     <p><strong>Due Date:</strong> ${ dueDate }</p>
                                     <p>Please return or renew the book before the due date to avoid late fees.</p>
                                     <p>Thank you for using our library services!</p>
@@ -42,7 +42,7 @@ function sendEmail(username, email, bookemail, dueDate){
     }
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
-            consele.error('Error sending email:', err);
+            console.error('Error sending email:', err);
         } else { 
             console.log("Email sent:", info.response);
         }

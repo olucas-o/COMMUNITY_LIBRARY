@@ -8,22 +8,22 @@ import loansController from '../controller/loansController.js';
 const router = Router();
 
 router.post(
-    '/loans',
+    '/',
     validate(loansSchema),
     loansController.createLoanController
 );
 router.use(authMiddleware);
 router.get(
-    '/loans',
+    '/',
     loansController.findAllLoansController
 );
 router.get(
-    '/loans/:id',
+    '/:id',
     validateId,
     loansController.findLoanByIdController
 );
 router.delete(
-    '/loans/:id',
+    '/:id',
     validateId,
     loansController.deleteBLoanContreller
 )

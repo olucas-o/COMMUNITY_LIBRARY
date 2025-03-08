@@ -6,31 +6,31 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = Router()
 router.get(
-    '/books',
+    '/',
     booksContreller.findAllBooksController
 );
 router.use(authMiddleware);
 router.post(
-    '/books',
+    '/',
     validate(booksSchema),
     booksContreller.createBookController
 )
 router.get(
-    '/books/search',
+    '/search',
     booksContreller.searchBooksController
 );
 router.get(
-    '/books/:id',
+    '/:id',
     validateId,
     booksContreller.findBookByIdController
 );
-router.patch('/books/:id',
+router.patch('/:id',
     validate(booksSchema), 
     validateId,
     booksContreller.updateBookController
 );
 router.delete(
-    '/books/:id',
+    '/:id',
     validateId,
     booksContreller.deleteBookContreller
 );

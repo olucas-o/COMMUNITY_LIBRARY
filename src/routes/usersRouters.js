@@ -8,28 +8,28 @@ import {authMiddleware} from '../middleware/authMiddleware.js'
 const router = Router();
 
 router.post(
-    '/users',
+    '/',
     validate(userSchema),
     userController.createUserController
 );
 router.post(
-    '/users/login',
+    '//login',
     userController.loginController
 );
 router.use(authMiddleware)
 router.get(
-    '/users', 
+    '/', 
     userController.findAllUsersController
 );
-router.get('/users/:id',
+router.get('/:id',
     validateId,
     userController.findUserByIdController
 );
-router.patch('/users/:id',
+router.patch('/:id',
     validateId,
     userController.updateUserController
 );
-router.delete('/users/:id',
+router.delete('/:id',
     validateId, 
     userController.deleteUserContreller
 );
