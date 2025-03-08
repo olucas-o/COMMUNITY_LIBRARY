@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Community Library - Backend
 
 ## Description
@@ -82,4 +83,3 @@ This project is licensed under the MIT License.
 ## Contact
 
 For any inquiries, reach out to [**lucas.ornelas.dev@gmail.com**](mailto\:your.email@example.com).
-
