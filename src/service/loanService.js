@@ -1,7 +1,7 @@
 import  loansRepositores  from '../repositories/loansRepositores.js';
 
-async function createLoansService(newLoans, userId) {
-    const loansCreated = await loansRepositores.createLoanRepository(newLoans, userId);
+async function createLoansService(bookId, userId, dueDate) {
+    const loansCreated = await loansRepositores.createLoanRepository(bookId, userId ,dueDate);
     return loansCreated;
 };
 

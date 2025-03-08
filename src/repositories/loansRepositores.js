@@ -11,20 +11,19 @@ db.run(`
     )
 `);
 
-function createLoanRepository(newLoans,userId){
+function createLoanRepository(bookId ,userId, dueDate){
     return new Promise((res, rej) =>{
-        const {Bookid, Date} = newLoans
         db.run(`
             INSERT INTO loans (bookId, userId, dateLoan)
             VALUES (?, ?, ?)
-            `, 
-            [Bookid, userId, Date], 
+            `,
+            [bookId, userId, dueDate], 
             function(err) {
                 if (err) {
                     rej(err)
                 } else {
                     
-                    res({id: this.lastID, ...newLoans })
+                    res({id: this.lastID, bookId, userId, dueDate  })
                 }
             }
         );

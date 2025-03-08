@@ -1,10 +1,10 @@
 import loanService from '../service/loanService.js';
 
 async function createLoanController (req, res) {
-    const newLoan = req.body;
+    const { bookId, dateLoan }  = req.body;
     const userId = req.userId;
     try {
-        const loansCreated = await loanService.createLoansService(newLoan, userId);
+        const loansCreated = await loanService.createLoansService(bookId, userId, dateLoan);
         res.status(201).send({loansCreated});
     } catch (err) {
         res.status(400).send({ message: err.message });

@@ -1,7 +1,9 @@
 import express from 'express';
-import usersRouters from './src/routes/usersRouters.js'
-import booksRouters from './src/routes/booksRouters.js'
+import usersRouters from './src/routes/usersRouters.js';
+import booksRouters from './src/routes/booksRouters.js';
 import loansRouter from './src/routes/loansRouter.js';
+import 'dotenv/config.js';
+import './src/service/cronService.js' 
 
 const app = express();
 
