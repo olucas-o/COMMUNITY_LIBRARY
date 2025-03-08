@@ -18,7 +18,7 @@ export function authMiddleware(req, res, next) {
     const [scheme, token] = parts;
     
     if (!/^Bearer$/i.test(scheme)) {
-    return res.status(401).send({ message: "bad Token" });
+    return res.status(401).send({ message: "Bad Token" });
     }
     
     jwt.verify(token, process.env.SECRET_JWT, async (err, decoded) => {

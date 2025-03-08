@@ -3,7 +3,7 @@ import db from "../config/database.js";
 db.run(`
     CREATE TABLE IF NOT EXISTS books (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        bookname TEXT NOT NULL,
+        title TEXT NOT NULL,
         author TEXT UNIQUE NOT NULL,
         idUser INTERGER,
         FOREIGN KEY (idUser) REFERENCES users(id)
@@ -12,12 +12,12 @@ db.run(`
 
 function createBookRepository(newBook,idUser){
     return new Promise((res, rej) =>{
-        const { bookname, author } = newBook;
+        const { title, author } = newBook;
         db.run(`
-            INSERT INTO books (bookname, author, idUser)
+            INSERT INTO books (title, author, idUser)
             VALUES (?, ?, ?)
             `, 
-            [bookname, author, idUser], 
+            [title, author, idUser], 
             function(err) {
                 if (err) {
                     rej(err)
@@ -32,7 +32,7 @@ function createBookRepository(newBook,idUser){
 function findAllBooksRepository(){
     return new Promise((res,req)=>{
         db.all(`
-            SELECT id, bookname, author, idUser FROM books   
+            SELECT id, title, author, idUser FROM books   
         `,
         [],
         (err,row)=>{
@@ -48,7 +48,7 @@ function findAllBooksRepository(){
 function findBookByIdRepository(id){
     return new Promise((res,req)=>{
         db.get(`
-            SELECT id, bookname, author, idUser FROM books
+            SELECT id, title, author, idUser FROM books
             WHERE id = ?    
         `,
         [id],
@@ -64,7 +64,7 @@ function findBookByIdRepository(id){
 
 function updateBookRepository(id, book) {
     return new Promise((res, req)=> {
-        const fields = ['bookname', 'author', 'idUser'];
+        const fields = ['title', 'author', 'idUser'];
         let query = 'UPDATE books SET';
         const values = [];
 
@@ -107,7 +107,7 @@ function deleteBookByIDRepository(id){
 
 function searchBookRepository(search) {
     return new Promise((res, rej) => {
-    db.all(`SELECT * FROM books WHERE bookname LIKE ? OR author LIKE ?`,
+    db.all(`SELECT * FROM books WHERE title LIKE ? OR author LIKE ?`,
     [`%${search}%`, `%${search}%`],
     (err, rows) => {
     if (err) rej(err);

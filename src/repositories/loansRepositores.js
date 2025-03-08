@@ -5,16 +5,16 @@ db.run(`
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         bookId INTEGER,
         userId INTEGER,
-        dateLoan DATE,
+        dueDate DATE,
         FOREIGN KEY (userId) REFERENCES users(id),
-        FOREIGN KEY (DateLoan) REFERENCES users(id)
+        FOREIGN KEY (dueDate) REFERENCES users(id)
     )
 `);
 
 function createLoanRepository(bookId ,userId, dueDate){
     return new Promise((res, rej) =>{
         db.run(`
-            INSERT INTO loans (bookId, userId, dateLoan)
+            INSERT INTO loans (bookId, userId, dueDate)
             VALUES (?, ?, ?)
             `,
             [bookId, userId, dueDate], 
@@ -49,7 +49,7 @@ function findAllLoansRepository(){
 function findLoansByIdRepository(id){
     return new Promise((res,req)=>{
         db.get(`
-            SELECT id, bookId, userId, dateLoan FROM loans
+            SELECT id, bookId, userId, dueDate FROM loans
             WHERE id = ?    
         `,
         [id],

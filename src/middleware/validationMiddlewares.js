@@ -12,7 +12,6 @@ const validate = (schema)=> async (req, res, next)=>{
 const validateId = (req, res, next)=>{
     try{
         IdSchema.parse({Id: +req.params.id});
-        console.log(+req.params.id)
         next();
     }catch(e){
         res.status(400).send({error: e.errors})

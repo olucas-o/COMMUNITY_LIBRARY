@@ -24,7 +24,6 @@ async function updateBookServise (newBook, bookId, userId) {
     if(!book) throw new Error("Book not exist");
     if(book.idUser !== userId) throw new Error("Unauthorized");
     const bookUpdated = bookReposotorie.updateBookRepository(bookId, newBook);
-    console.log(bookUpdated)
     return (bookUpdated)
 }
 

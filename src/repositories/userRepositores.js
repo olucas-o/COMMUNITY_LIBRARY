@@ -3,7 +3,7 @@ import db from '../config/database.js';
 db.run(`
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
+        userName TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
         avatar TEXT
@@ -12,12 +12,12 @@ db.run(`
 
 function createUserRepository(newUser){
     return new Promise((res, rej) =>{
-        const { username, email, password, avatar } = newUser;
+        const { userName, email, password, avatar } = newUser;
         db.run(`
-            INSERT INTO users (username, email, password, avatar)
+            INSERT INTO users (userName, email, password, avatar)
             VALUES (?, ?, ?, ?)
             `, 
-            [username, email, password, avatar], 
+            [userName, email, password, avatar], 
             function(err) {
                 if (err) {
                     rej(err)
@@ -32,7 +32,7 @@ function createUserRepository(newUser){
 function findUserByEmailRepository(email){
     return new Promise((res,req)=>{
         db.get(`
-            SELECT id, username, email, avatar FROM users
+            SELECT id, userName, email, avatar FROM users
             WHERE email = ?    
         `,
         [email],
@@ -49,7 +49,7 @@ function findUserByEmailRepository(email){
 function findUserByIdRepository(id){
     return new Promise((res,req)=>{
         db.get(`
-            SELECT id, username, email, avatar FROM users
+            SELECT id, userName, email, avatar FROM users
             WHERE id = ?    
         `,
         [id],
@@ -81,7 +81,7 @@ function findAllUserRepository(){
 
 function updateUserRepository(id, user) {
     return new Promise((res, req)=> {
-        const fields = ['username', 'email', 'password', 'avatar'];
+        const fields = ['userName', 'email', 'password', 'avatar'];
         let query = 'UPDATE users SET';
         const values = [];
 
