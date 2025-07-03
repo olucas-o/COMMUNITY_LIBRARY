@@ -6,13 +6,13 @@ import loansController from '../controller/loansController.js';
 
 
 const router = Router();
-
+router.use(authMiddleware);
 router.post(
-    '/',
+    '/:id',
+    validateId,
     validate(loansSchema),
     loansController.createLoanController
 );
-router.use(authMiddleware);
 router.get(
     '/',
     loansController.findAllLoansController

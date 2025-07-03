@@ -2,6 +2,9 @@ import express from 'express';
 import 'dotenv/config.js';
 import './src/service/cronService.js';
 import routers from './src/routes/index.js'
+import connectDB from './src/config/mongo.js';
+
+connectDB();
 
 const app = express();
 
